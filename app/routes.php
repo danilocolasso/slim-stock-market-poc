@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\HelloController;
+use App\Controllers\HelloController;
 use Slim\App;
 
 return function (App $app) {
@@ -11,4 +11,5 @@ return function (App $app) {
 
     // protected routes
     $app->get('/bye/{name}', HelloController::class . ':bye');
+    $app->get('/stock', HelloController::class . ':test');
 };
