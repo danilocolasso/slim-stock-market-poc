@@ -6,7 +6,7 @@ up:
 	docker-compose up -d
 	docker-compose exec app composer install
 	cp .env.sample .env
-    # 	docker-compose exec app php vendor/bin/phinx migrate
+	docker-compose exec app php vendor/bin/phinx migrate
 
 down:
 	docker-compose down -v

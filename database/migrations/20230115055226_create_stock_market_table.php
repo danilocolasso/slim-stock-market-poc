@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Phinx\Migration\AbstractMigration;
 
 class CreateStockMarketTable extends AbstractMigration
