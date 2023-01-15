@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
+use App\Interfaces\StockMarketInterface;
+use App\Services\StooqService;
 use DI\ContainerBuilder;
+use GuzzleHttp\Client;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 return function (ContainerBuilder $containerBuilder) {
@@ -35,8 +38,6 @@ return function (ContainerBuilder $containerBuilder) {
             return new Swift_Mailer($transport);
         },
 
-        'db' => function ($container) use ($capsule){
-            return $capsule;
-        }
+        StockMarketInterface::class => fn() => new StooqService(new Client()),
     ]);
 };

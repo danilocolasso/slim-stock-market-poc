@@ -14,8 +14,17 @@ class AuthController
         try {
             $data = $request->getParsedBody();
 
-            if (!isset($data['name']) || !isset($data['username']) || !isset($data['password'])) {
-                throw new \Exception('The fields name, username and password are required.');
+            if (
+                !isset($data['name']) ||
+                !isset($data['email']) ||
+                !isset($data['username']) ||
+                !isset($data['password'])
+            ) {
+                throw new \Exception('The fields name, email, username and password are required.');
+            }
+
+            if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                throw new \Exception('The e-mail is not valid.');
             }
 
             $service = new UserRegistrationService();

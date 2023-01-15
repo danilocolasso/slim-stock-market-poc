@@ -2,17 +2,39 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
-class StooqService
+use App\Interfaces\StockMarketInterface;
+use Psr\Http\Client\ClientInterface;
+
+class StooqService implements StockMarketInterface
 {
-    private const URL = 'https://stooq.com/q/l/?s=%s&f=sd2t2ohlcvn&h&e=csv';
-    public function getStockMarketValues(string $stockCode): array
+    private const BASE_URI = 'https://stooq.com';
+    private const ENDPOINT = '/q/l/';
+
+    public function __construct(
+        protected ClientInterface $client
+    ) {}
+
+    public function getData(string $stockCode): array
     {
-        $client = new Client();
-        $res = $client->request('GET', sprintf(self::URL, $stockCode));
+        $requestOptions = [
+            'base_uri' => self::BASE_URI,
+            'query' => [
+                's' => $stockCode,
+                'f' => 'sd2t2ohlcvn',
+                'h' => '',
+                'e' => 'csv',
+            ],
+        ];
+
+        $res = $this->client->request('GET', self::ENDPOINT, $requestOptions);
         $contents = $res->getBody()->getContents();
 
-        $rows = explode(PHP_EOL, $contents);
+        return $this->csvToArray($contents);
+    }
+
+    private function csvToArray(string $csvString): array
+    {
+        $rows = explode(PHP_EOL, $csvString);
         $headers = str_getcsv(strtolower($rows[0]));
         unset($rows[0]);
 
