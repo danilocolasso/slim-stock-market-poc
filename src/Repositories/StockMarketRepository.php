@@ -19,6 +19,9 @@ class StockMarketRepository
 
     public static function getHistory(): array
     {
-        return StockMarket::all()->toArray();
+        return StockMarket::query()
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->toArray();
     }
 }

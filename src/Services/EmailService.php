@@ -16,7 +16,7 @@ class EmailService implements MailerInterface
         $message = new \Swift_Message($subject);
 
         $message
-            ->setFrom([])
+            ->setFrom([$_ENV['MAILER_FROM']])
             ->setTo([$to])
             ->setBody($body);
 

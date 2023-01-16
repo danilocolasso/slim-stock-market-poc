@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Interfaces\MailerInterface;
 use App\Interfaces\StockMarketInterface;
-use App\Models\StockMarket;
 use Psr\Http\Client\ClientInterface;
 
 abstract class AbstractStockMarket implements StockMarketInterface

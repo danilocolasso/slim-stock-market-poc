@@ -17,7 +17,15 @@ Make sure you have installed Docker Desktop. If you don't, follow the <a href="h
 #### Up the containers
     $ make up
 
-All done! Everything should work wth a single command. The application will be available at
+#### Change the mailer settings on .env to a valid one
+    MAILER_HOST=
+    MAILER_PORT=
+    MAILER_USERNAME=
+    MAILER_PASSWORD=
+
+By default I left my data so it should work. But I advise you to change it.
+
+**All done!** Everything should work wth a single command. The application will be available at
 http://localhost/
 
 ## User guide
@@ -91,6 +99,9 @@ The Authorization must be the same provided by login action too.
 - Use timestamp on "time" column. I decided to use string to simplify
 - Unit and Integration Tests (I'm really sorry for not doing tests, I would like to and I know it. I do it everyday...)
 - Use RabbitMQ to send e-mails asynchronously
+
+## Notes
+I've never worked with Slim before, so I read about it and made it as good as possible. Using Laravel as inspiration.
 
 <h4 align="center">
     Made with ♡ by <a href="https://www.linkedin.com/in/danilocolasso/" target="_blank">Danilo Colasso</a>
