@@ -3,13 +3,12 @@
 namespace App\Controllers;
 use App\Services\UserLoginService;
 use App\Services\UserRegistrationService;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class AuthController
 {
-    public function register(Request $request, Response $response): ResponseInterface
+    public function register(Request $request, Response $response): Response
     {
         try {
             $data = $request->getParsedBody();
@@ -44,7 +43,7 @@ class AuthController
         return $response;
     }
 
-    public function login(Request $request, Response $response): ResponseInterface
+    public function login(Request $request, Response $response): Response
     {
         try {
             $data = $request->getParsedBody();

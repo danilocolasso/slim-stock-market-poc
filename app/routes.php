@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Controllers\AuthController;
-use App\Controllers\HelloController;
 use App\Controllers\StockMarketController;
 use App\Middlewares\JwtAuthMiddleware;
 use Slim\App;
@@ -17,7 +16,8 @@ return function (App $app) {
     });
 
     // protected routes
-    $app->group('/api', function (RouteCollectorProxy $group) {
+    $app->group('', function (RouteCollectorProxy $group) {
         $group->get('/stock', StockMarketController::class . ':getData');
+        $group->get('/history', StockMarketController::class . ':getHistory');
     })->addMiddleware(new JwtAuthMiddleware());
 };

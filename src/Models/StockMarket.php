@@ -17,7 +17,12 @@ class StockMarket extends Model
         'volume',
         'name',
     ];
+    protected $casts = [
+        'date' => 'date:Y-m-d',
+    ];
     protected $hidden = [
         'id',
+        'created_at',
+        'updated_at',
     ];
 }

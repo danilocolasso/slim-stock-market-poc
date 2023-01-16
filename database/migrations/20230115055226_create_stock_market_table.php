@@ -13,7 +13,7 @@ class CreateStockMarketTable extends AbstractMigration
 
         $table->addColumn('symbol', 'string');
         $table->addColumn('date', 'date');
-        $table->addColumn('time', 'timestamp');
+        $table->addColumn('time', 'string');
         $table->addColumn('open', 'double');
         $table->addColumn('high', 'double');
         $table->addColumn('low', 'double');

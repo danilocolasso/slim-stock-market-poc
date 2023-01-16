@@ -18,10 +18,7 @@ class UserRegistrationService
             throw new Exception('Username already exists.');
         }
 
-        User::create([
-            'name' => $data['name'],
-            'username' => $data['username'],
-            'password' => password_hash($data['password'], PASSWORD_ARGON2ID),
-        ]);
+        $data['password'] = password_hash($data['password'], PASSWORD_ARGON2ID);
+        User::create($data);
     }
 }

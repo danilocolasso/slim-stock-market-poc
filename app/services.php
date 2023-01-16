@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use App\Interfaces\MailerInterface;
 use App\Interfaces\StockMarketInterface;
+use App\Services\EmailService;
 use App\Services\StooqService;
 use DI\ContainerBuilder;
 use GuzzleHttp\Client;
@@ -38,6 +40,8 @@ return function (ContainerBuilder $containerBuilder) {
             return new Swift_Mailer($transport);
         },
 
-        StockMarketInterface::class => fn() => new StooqService(new Client()),
+        Client::class => fn() => new Client(),
+        MailerInterface::class => fn(Swift_Mailer $mailer) => new EmailService($mailer),
+        StockMarketInterface::class => fn(Client $client, EmailService $mailer) => new StooqService($client, $mailer),
     ]);
 };

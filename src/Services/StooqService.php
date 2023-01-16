@@ -2,17 +2,12 @@
 
 namespace App\Services;
 
-use App\Interfaces\StockMarketInterface;
-use Psr\Http\Client\ClientInterface;
+use App\Repositories\StockMarketRepository;
 
-class StooqService implements StockMarketInterface
+class StooqService extends AbstractStockMarket
 {
     private const BASE_URI = 'https://stooq.com';
     private const ENDPOINT = '/q/l/';
-
-    public function __construct(
-        protected ClientInterface $client
-    ) {}
 
     public function getData(string $stockCode): array
     {
@@ -28,8 +23,11 @@ class StooqService implements StockMarketInterface
 
         $res = $this->client->request('GET', self::ENDPOINT, $requestOptions);
         $contents = $res->getBody()->getContents();
+        $this->data = $this->csvToArray($contents);
 
-        return $this->csvToArray($contents);
+        StockMarketRepository::saveHistory($this->data);
+
+        return $this->data;
     }
 
     private function csvToArray(string $csvString): array
@@ -45,7 +43,7 @@ class StooqService implements StockMarketInterface
                 continue;
             }
 
-            $data[] = array_combine($headers, $row);
+            $data = array_combine($headers, $row);
         }
 
         return $data;
