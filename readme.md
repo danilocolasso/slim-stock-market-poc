@@ -1,4 +1,4 @@
-PHP Challenge
+PHP stock market api POC
 ===================
 
 ## Before install
@@ -8,7 +8,7 @@ Make sure you have installed Docker Desktop. If you don't, follow the <a href="h
 ## Installation guide
 
 #### Clone the project
-    $ git clone git@git.jobsity.com:danilocolasso/php-challenge.git
+    $ git clone git@github.com:danilocolasso/slim-stock-market-poc.git
 
 #### Enter project folder
     
