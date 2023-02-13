@@ -17,25 +17,20 @@ class JwtAuthMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        try {
-            $headers = $request->getHeaders();
+        $headers = $request->getHeaders();
 
-            if (!isset($headers['Authorization'])) {
-                throw new \Exception('JWT Token not found.');
-            }
-
-            $token = trim(str_replace('Bearer', '', $headers['Authorization'][0]));
-            $user = JWT::decode($token, new Key($_ENV['APP_KEY'], self::JWT_ALG));
-
-            if (!User::where('username', $user->username)->exists()) {
-                throw new \Exception('The given user doesn\'t exist.');
-            }
-
-            $request = $request->withAttribute('user', $user);
-
-        } catch (\Exception $exception) {
-            throw new HttpUnauthorizedException($request, $exception->getMessage());
+        if (!isset($headers['Authorization'])) {
+            throw new HttpUnauthorizedException($request, 'JWT Token not found.');
         }
+
+        $token = trim(str_replace('Bearer', '', $headers['Authorization'][0]));
+        $user = JWT::decode($token, new Key($_ENV['APP_KEY'], self::JWT_ALG));
+
+        if (!User::where('username', $user->username)->exists()) {
+            throw new HttpUnauthorizedException($request, 'The given user doesn\'t exist.');
+        }
+
+        $request = $request->withAttribute('user', $user);
 
         return $handler->handle($request);
     }
