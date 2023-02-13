@@ -11,7 +11,7 @@ abstract class AbstractStockMarket implements StockMarketInterface
     public bool $sendEmail = true;
     protected array $data = [];
 
-    protected const EMAIL_SUBJECT = 'Stock Market Right Now';
+    public const EMAIL_SUBJECT = 'Stock Market Right Now';
 
     public function __construct(
         protected ClientInterface $client,
