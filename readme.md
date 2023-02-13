@@ -97,7 +97,8 @@ The Authorization must be the same provided by login action too.
 - Improve JWT payload for security, like add IP
 - Use DTO to avoid mistakes with array
 - Use timestamp on "time" column. I decided to use string to simplify
-- Unit and Integration Tests (I'm really sorry for not doing tests, I would like to and I know it. I do it everyday...)
+- Add tests for EmailService, UserLogin and Registration Services
+- Add more tests for StooqService
 - Use RabbitMQ to send e-mails asynchronously
 
 ## Notes
