@@ -101,8 +101,6 @@ The Authorization must be the same provided by login action too.
 - Add more tests for StooqService
 - Use RabbitMQ to send e-mails asynchronously
 
-## Notes
-I've never worked with Slim before, so I read about it and made it as good as possible. Using Laravel as inspiration.
 
 <h4 align="center">
     Made with ♡ by <a href="https://www.linkedin.com/in/danilocolasso/" target="_blank">Danilo Colasso</a>
